@@ -1,0 +1,91 @@
+<html lang="fr">
+<head>
+	<meta charset="UTF-8">
+	<title>TP2 S4</title>
+	<link rel="shorcut icon" type="image/x-icon" href="iconeweb.ico" />
+		<style>
+		form{
+			width: 800px;
+			margin :auto;
+		}
+		input{
+			display: block;
+			border: 1px solid;
+			padding: 4px;
+		}
+		placeholder-shown{
+			border-color: silver;
+		}
+
+
+		</style>
+
+
+
+</head>
+
+<body>
+
+<form name="myForm">
+	<fieldset>
+		<h2>Calcul de l'indice de masse corporelle</h2>
+    <h3>Insérez votre masse en KG et votre taille en m dans les deux champs de texte suivants: </h3>
+    <br>
+    <label for="poid">Masse (en KG): </label>
+		  <input type="number" name="poid" id="poid" min="1" placeholder="00">
+    <br>
+    <label for="taille">Taille (en m): </label>
+		  <input type="number" step="0.01" name="taille" id="taille" placeholder="0.00">
+    <br>
+		<p id="effacer">Effacer</p>
+		<p id="calcul">Calcul</p>
+
+		<p id="resultat"> </p>	<!-- variable modifiée par le innerHTML en js -->
+
+
+</form>
+
+<script type="text/javascript">
+
+
+document.getElementById("effacer").addEventListener("click",rien);
+document.getElementById("calcul").addEventListener("click",calculIMC);
+		function rien(){
+			console.log("test");
+		}
+
+		 function calculIMC(){
+			 var text = "Votre IMC est égale à ";
+			 var resultat = 00;
+			 var poid = 00;
+			 var taille = 0.00;
+			 var verdict = " "
+
+		 	poid = document.getElementById("poid").value;
+			taille = document.getElementById("taille").value;
+		 	resultat = poid/(taille*taille);
+
+			if (resultat<18.5){
+				verdict = " maigre";
+			}
+			else if (resultat>18.5 && resultat<25){
+				verdict = " normal chez un adulte";
+			}
+			else if (resultat>25 && resultat<30){
+				 verdict = " surpoids (surcharge pondérale)";
+			}
+			else if (resultat>30 && resultat<35) {
+				 verdict = " obésité";
+			}
+			else if (resultat>35 && resultat<40){
+				 verdict = " obésité sèvère";
+			}
+		 	console.log(resultat);
+		 	document.getElementById("resultat").innerHTML= text + resultat + verdict;
+		 }
+
+
+</script>
+</body>
+
+</html>
