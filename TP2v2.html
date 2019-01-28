@@ -28,15 +28,17 @@
     <h3>Insérez votre masse en KG et votre taille en m dans les deux champs de texte suivants: </h3>
     <br>
     <label for="poid">Masse (en KG): </label>
-		  <input type="number" name="poid" id="poid" min="1" placeholder="00">
+		  <input type="number" onchange="verifyValues()"name="poid" id="poid" min="1" placeholder="00">
 			<p id="erreurPoid"> </p>
+			<img src="" id="poid">
     <br>
     <label for="taille">Taille (en m): </label>
-		  <input type="number" step="0.01" name="taille" id="taille" placeholder="0.00">
+		  <input type="number" onchange="calculIMC()" step="0.01" name="taille" id="taille" placeholder="0.00">
 			<p id="erreurTaille"> </p>
+			<img src="" id="taille">
     <br>
 		<input type="reset" id="effacer" value="Effacer">
-		<input type="button" id="calcul" value="Calcul" onmouseover="sourisSurBoutton()" onmouseout="sourisHorsBoutton()" >
+		<input type="button" id="calculIMC()" value="Calcul" onmouseover="sourisSurBoutton()" onmouseout="sourisHorsBoutton()" >
 		<p id="conseil"> appuyer sur le boutton pour calculer l'IMC </p>
 		<p id="resultat"> </p>	<!-- variable modifiée par le innerHTML en js -->
 
@@ -44,7 +46,6 @@
 </form>
 
 <script type="text/javascript">
-
 
 document.getElementById("effacer").addEventListener("click",rien);
 document.getElementById("calcul").addEventListener("click",calculIMC);
@@ -73,32 +74,29 @@ document.getElementById("calcul").addEventListener("click",calculIMC);
 		}
 
 		function verifyValues(){
-			var bool = true;
-			var poid = document.getElementById("poid").value;
-			var	taille = document.getElementById("taille").value;
-			var poidErreur = " ";
-			var tailleErreur = " ";
 
-			if (isNaN(poid){
-				poidErreur = "Veuillez renseigner un nombre entier pour le poid (00)";
-				bool = false;
+			if (!document.getElementById("poid").value){
+				document.getElementById("erreurPoid").innerHTML= "Veuillez renseigner un nombre entier pour le poid (00)";
+				return false;
 			}
-			else if (poid < 1){
-				poidErreur = "Veuillez renseigner un poid supérieur à 0";
-				bool = false;
+			else if (document.getElementById("poid").value <0){
+				document.getElementById("erreurPoid").innerHTML= "Veuillez renseigner un poid supérieur à 0";
+				return false;
 			}
-			if (isNaN(taille)){
-				tailleErreur = "Veuillez renseigner un nombre réél pour la taille (0.00)";
+
+			document.getElementById("erreurPoid").innerHTML= " ";
+
+			if (!document.getElementById("taille").value){
+				document.getElementById("erreurTaille").innerHTML= "Veuillez renseigner un nombre réél pour la taille (0.00)";
+				return false;
 			}
-			else if (taille < 1){
-				tailleErreur = "Veuillez renseinger une taille supérieur à 0";
-				bool = false;
+			else if (document.getElementById("taille").value < 0){
+				document.getElementById("erreurTaille").innerHTML= "Veuillez renseinger une taille supérieur à 0";
+				return false;
 			}
-			console.log(erreurPoid);
-			console.log(erreurTaille);
-		 	document.getElementById("erreurPoid").innerHTML= poidErreur;
-			document.getElementById("erreurTaille").innerHTML= poidErreur;
-			return bool;
+			document.getElementById("erreurTaille").innerHTML= " ";
+
+			return true;
 		}
 
 		 function calculIMC(){
@@ -133,6 +131,9 @@ document.getElementById("calcul").addEventListener("click",calculIMC);
 			}
 		 	console.log(resultat);
 		 	document.getElementById("resultat").innerHTML= text + resultat + verdict;
+			}else{
+
+			document.getElementById("resultat").innerHTML= " ";
 			}
 		}
 
