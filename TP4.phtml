@@ -1,0 +1,59 @@
+<!DOCTYPE HTML>
+<html lang="fr">
+<head>
+	<meta charset="UTF-8">
+	<title>TP4 S4</title>
+</head>
+<body>
+	<div id="resultat">
+	</div>
+
+	<h1>tp4.</h1>
+
+	<form>
+		<p>
+			Login:		<input type="text" id="username" placeholder="votre login">
+		<br>
+			Password:
+			<input type="password" id="password">
+		<br>
+			<input type="submit" id="submit" value="Se connecter" />
+		</p>
+	</form>
+
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js">
+	</script>
+</body>
+</html>
+
+<script>
+
+$(document).ready(function(){
+
+	$("#submit").click(function(e){
+		e.preventDefault();
+
+		$.post(
+			'login.php',
+			{
+				username : $("#username").val(),
+				password : $("#password").val()
+			},
+
+			function(data){
+				if(data == 'Success'){
+					$("#resultat").html("<p>Vous avez été connecté avec succès !</p>");
+				}
+				else{
+					$("#resultat").html("<p>Erreur lors de la connexion...</p>");
+				}
+			},
+
+			'text'
+		);
+
+	});
+
+});
+
+</script>
