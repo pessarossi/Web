@@ -1,0 +1,61 @@
+<!DOCTYPE HTML>
+<html lang="fr">
+<head>
+	<meta charset="UTF-8">
+	<title>TP4 S4</title>
+</head>
+<body>
+
+<h1>tp4.</h1>
+
+<form>
+Login:
+<input type="text" id="username" name="login" placeholder="votre login">
+<br>
+Password:
+<input type="password" id="password">
+<br>
+</form>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js">
+
+$(document).ready(function(){
+
+  $("#submit").click(function{
+
+    $.post(
+      'connexion.php',
+
+      {
+        username : $("#username").val(),
+        password : $("#password").val()
+      },
+
+      function(data){
+
+      },
+
+      'text'
+    );
+
+  });
+
+});
+
+</script>
+
+<?php
+
+  $username = "demo";
+  $password = "Demo2019%";
+
+  if( isset($_POST['username']) && isset($_POST['password']) ){
+
+  }
+
+
+
+?>
+
+</body>
+</html>
